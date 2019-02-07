@@ -13,6 +13,7 @@ public:
     static string intToStringConversion(int number);
     static int stringToIntConversion(string number);
     static string loadLine();
+    static char loadSign();
+    static double stringToDoubleConversion (string word);
 };
-
 #endif

@@ -15,6 +15,7 @@ void UserManager::login()
     User user;
     string login = "", password = "";
 
+    system("cls");
     cout << endl << "Podaj login: ";
     cin >> login;
 
@@ -54,6 +55,7 @@ User UserManager::setNewUserData()
     user.setId(getNewUserId());
 
     string login;
+    system("cls");
     do
     {
         cout <<  "Podaj login: ";
@@ -67,16 +69,12 @@ User UserManager::setNewUserData()
     cin >> password;
     user.setPassword(password);
 
-    string name;
+    cin.sync();
     cout << "Podaj imie: ";
-    cin >> name;
-    user.setName(name);
+    user.setName(HelpingMethods::loadLine());
 
-
-    string surname;
     cout << "Podaj nazwisko: ";
-    cin >> surname;
-    user.setSurname(surname);
+    user.setSurname(HelpingMethods::loadLine());
 
 
     return user;
