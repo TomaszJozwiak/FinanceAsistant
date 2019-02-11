@@ -16,7 +16,7 @@ void UserManager::login()
     string login = "", password = "";
 
     system("cls");
-    cout << endl << "Podaj login: ";
+    cout << "Podaj login: ";
     cin >> login;
 
     for (int i = 0; i < users.size(); i++)
@@ -105,6 +105,7 @@ bool UserManager::loginExists(string login)
 void UserManager::changePassword()
 {
     string newPassword = "";
+    system("cls");
     cout << "Podaj nowe haslo: ";
     cin >> newPassword;
 

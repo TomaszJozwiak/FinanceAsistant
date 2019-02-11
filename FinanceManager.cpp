@@ -35,22 +35,14 @@ Income FinanceManager::setNewIncomeData()
         {
             cout << "Wprowadz date przychodu w formacie RRRR-MM-DD" << endl;
             cin >> date;
-            if (date.length() == 10)
+            if (dateInCorrectFormat(date))
             {
-                if (dateOperations.dateCorrect(stringDateToIntDateConversion(date)))
-                {
-                    income.setDate(stringDateToIntDateConversion(date));
-                    break;
-                }
-                else
-                {
-                    cout << "Wprowadzono niepoprawna date - czy chcesz dodac przychod z dzisiaj? <t/n>: " << endl;
-                    cin.sync();
-                }
+                income.setDate(stringDateToIntDateConversion(date));
+                break;
             }
             else
             {
-                cout << "Wprowadzono niepoprawny format daty - czy chcesz dodac przychod z dzisiaj? <t/n>: ";
+                cout << "Wprowadzono niepoprawna date - czy chcesz dodac wydatek z dzisiaj? <t/n>: ";
             }
         }
         else
@@ -65,6 +57,9 @@ Income FinanceManager::setNewIncomeData()
 
     cout << "Podaj wysokosc przychodu: ";
     income.setAmount(changeCommaToDot(HelpingMethods::loadLine()));
+
+    cout << endl << "Przychod dodany" << endl;
+    system("pause");
 
     return income;
 }
@@ -105,22 +100,13 @@ Expense FinanceManager::setNewExpenseData()
             cout << "Wprowadz date wydatku w formacie RRRR-MM-DD" << endl;
             cin >> date;
 
-            if (date.length() == 10)
+            if (dateInCorrectFormat(date))
             {
-                if (dateOperations.dateCorrect(stringDateToIntDateConversion(date)))
-                {
-                    expense.setDate(stringDateToIntDateConversion(date));
-                    break;
-                }
-                else
-                {
-                    cout << "Wprowadzono niepoprawna date - czy chcesz dodac wydatek z dzisiaj? <t/n>: " << endl;
-                    cin.sync();
-                }
+                expense.setDate(stringDateToIntDateConversion(date));
             }
             else
             {
-                cout << "Wprowadzono niepoprawny format daty - czy chcesz dodac wydatek z dzisiaj? <t/n>: ";
+                cout << "Wprowadzono niepoprawna date - czy chcesz dodac wydatek z dzisiaj? <t/n>: ";
             }
         }
         else
@@ -135,6 +121,9 @@ Expense FinanceManager::setNewExpenseData()
 
     cout << "Podaj wysokosc wydatku: ";
     expense.setAmount(changeCommaToDot(HelpingMethods::loadLine()));
+
+    cout << endl << "Wydatek dodany" << endl;
+    system("pause");
 
     return expense;
 }
@@ -216,17 +205,9 @@ void FinanceManager::selectedPeriodBalance()
     cout << "Wprowadz date w formacie RRRR-MM-DD, od ktorej chcesz wyswietlic bilans" << endl;
     {
         while (cin >> dateFrom)
-            if (dateFrom.length() == 10)
+            if (dateInCorrectFormat(dateFrom))
             {
-                if (dateOperations.dateCorrect(stringDateToIntDateConversion(dateFrom)))
-                {
-                    break;
-                }
-                else
-                {
-                    cout << "Wprowadzono niepoprawna date - Wprowadz date w formacie RRRR-MM-DD, od ktorej chcesz wyswietlic bilans" << endl;
-                    cin.sync();
-                }
+                break;
             }
             else
             {
@@ -236,35 +217,28 @@ void FinanceManager::selectedPeriodBalance()
     cout << "Wprowadz date w formacie RRRR-MM-DD, do ktorej chcesz wyswietlic bilans" << endl;
     {
         while (cin >> dateTo)
-            if (dateTo.length() == 10)
+            if (dateInCorrectFormat(dateTo))
             {
-                if (dateOperations.dateCorrect(stringDateToIntDateConversion(dateTo)))
-                {
-                    break;
-                }
-                else
-                {
-                    cout << "Wprowadzono niepoprawna date - Wprowadz date w formacie RRRR-MM-DD, do ktorej chcesz wyswietlic bilans" << endl;
-                    cin.sync();
-                }
+                break;
             }
             else
             {
-                cout << "Wprowadzono niepoprawny format daty - Wprowadz date w formacie RRRR-MM-DD, do ktorej chcesz wyswietlic bilans" << endl;
+                cout << "Wprowadzono niepoprawna date - Wprowadz date w formacie RRRR-MM-DD, do ktorej chcesz wyswietlic bilans" << endl;
             }
     }
 
-    cout << "---BILANS Z OKRESU " << dateFrom << "  -  " << dateTo << "---" << endl;
-    showSelectedPeriodIncome(incomes, dateFrom, dateTo);
-    cout << "--------------------" << endl;
-    showSelectedPeriodExpense(expenses, dateFrom, dateTo);
-    cout << "--------------------" << endl;
-    cout << "Suma przychodow w wybranym okresie wysiosla: " << incomeAmount << endl;
-    cout << "Suma wydatkow w wybranym okresie wysiosla: " << expenseAmount << endl;
-    cout << "Bilans z wybranego okresu wynosi: " << incomeAmount - expenseAmount << endl;
-    incomeAmount = 0;
-    expenseAmount = 0;
-    system("pause");
+system("cls");
+cout << "---BILANS Z OKRESU " << dateFrom << "  -  " << dateTo << "---" << endl;
+showSelectedPeriodIncome(incomes, dateFrom, dateTo);
+cout << "--------------------" << endl;
+showSelectedPeriodExpense(expenses, dateFrom, dateTo);
+cout << "--------------------" << endl;
+cout << "Suma przychodow w wybranym okresie wysiosla: " << incomeAmount << endl;
+cout << "Suma wydatkow w wybranym okresie wysiosla: " << expenseAmount << endl;
+cout << "Bilans z wybranego okresu wynosi: " << incomeAmount - expenseAmount << endl;
+incomeAmount = 0;
+expenseAmount = 0;
+system("pause");
 }
 
 void FinanceManager::showCurrentMonthIncome(vector <Income> incomes)
@@ -354,5 +328,24 @@ void FinanceManager::showSelectedPeriodExpense(vector <Expense> expenses, string
                  setw(35) << left << itr->getItem() << " " << itr->getAmount() << endl;
             expenseAmount = expenseAmount + HelpingMethods::stringToDoubleConversion(itr->getAmount());
         }
+    }
+}
+
+bool FinanceManager::dateInCorrectFormat(string date)
+{
+    if (date.length() == 10)
+    {
+        if (dateOperations.dateCorrect(stringDateToIntDateConversion(date)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
     }
 }

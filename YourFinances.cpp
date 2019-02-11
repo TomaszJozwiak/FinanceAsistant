@@ -140,7 +140,7 @@ char YourFinances::chooseOptionFromFinanceMenu()
 
 bool YourFinances::userIsLoggedId()
 {
-    if (userManager.getLoggedUserId() == 0)
+    if (userManager.userLoggedIn())
         return true;
     else
         return false;

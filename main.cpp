@@ -10,7 +10,7 @@ int main()
 
     while (true)
     {
-        if (yourFinances.userIsLoggedId())
+        if (!yourFinances.userIsLoggedId())
         {
             choice = yourFinances.chooseOptionFromMainMenu();
 
@@ -57,6 +57,10 @@ int main()
                 break;
             case '7':
                 yourFinances.logout();
+                break;
+            default:
+                cout << endl << "Nie ma takiej opcji w menu." << endl << endl;
+                system("pause");
                 break;
             }
         }

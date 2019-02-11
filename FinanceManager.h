@@ -31,6 +31,7 @@ Expense setNewExpenseData();
 string numberDateToStringDateConversion(int date);
 int stringDateToIntDateConversion(string date);
 string changeCommaToDot(string word);
+bool dateInCorrectFormat(string date);
 void showCurrentMonthIncome(vector <Income> incomes);
 void showCurrentMonthExpense(vector <Expense> expenses);
 void showPreviousMonthIncome(vector <Income> incomes);

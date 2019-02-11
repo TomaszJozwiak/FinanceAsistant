@@ -54,3 +54,24 @@
 <item>kasia</item>
 <amount>3r2</amount>
 </Income>
+<Income>
+<incomeId>9</incomeId>
+<userId>1</userId>
+<date>20011221</date>
+<item>z klubu</item>
+<amount>145.85</amount>
+</Income>
+<Income>
+<incomeId>10</incomeId>
+<userId>1</userId>
+<date>20190211</date>
+<item>123</item>
+<amount>534</amount>
+</Income>
+<Income>
+<incomeId>11</incomeId>
+<userId>1</userId>
+<date>20190211</date>
+<item>123</item>
+<amount>765</amount>
+</Income>
